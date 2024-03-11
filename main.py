@@ -12,13 +12,11 @@ html = """
         <title>PDF Text Extractor</title>
     </head>
     <body>
-        <div>
-            <h1>PDF Text Extractor</h1>
-            <form action="/extract_text" method="post" enctype="multipart/form-data">
-                <label for="pdf_file">Upload a PDF file:</label><br>
-                <input type="file" id="pdf_file" name="pdf_file"><br><br>
-                <input type="submit" value="Submit">
-            </form>
+        <div class="bg-gray-200 p-4 rounded-lg shadow-lg">
+            <h1>Hello from FastAPI@{__version__}</h1>
+            <ul>
+                <li><a href="/docs">/docs</a></li>
+            </ul>
             <p>Powered by <a href="https://vercel.com" target="_blank">Vercel</a></p>
         </div>
     </body>
