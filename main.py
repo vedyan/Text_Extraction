@@ -24,7 +24,7 @@ async def extract_text(pdf_file: UploadFile = File(...)) -> Any:
         return {"error": str(e)}
 
 
-@app.post("/extract_text")
+@app.post("/extract_text_from_url")
 async def extract_text_from_s3(pdf_url: str = Query(..., description="URL of the PDF file on S3")) -> Any:
     try:
         # Fetch the PDF content from the provided URL
