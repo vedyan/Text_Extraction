@@ -103,6 +103,7 @@ def extract_projects(text):
     1. Project Name
     2. Role/Position
     3. Date (Start date - End date, if available)
+    4. Responsibility
 
     Organize the extracted information into a structured response as a list with no heading. Each item in the list should contain the details for one project.
 
@@ -116,13 +117,13 @@ def extract_projects(text):
             "Project Name": "Data Dialect",
             "Role": "Team Lead",
             "Date": "1st September 2023 - 18th January 2024",
-            "responsibility":" Built end-to-end application enabling natural language database access using Google PaLM, LangChain, Chroma DB, streamlit and Hugging Face vector embeddings."
+            "Responsibility":" Built end-to-end application enabling natural language database access using Google PaLM, LangChain, Chroma DB, streamlit and Hugging Face vector embeddings."
         }},
         {{
             "Project Name": "Cell Vision",
             "Role": "Data Collector",
             "Date": "24th June 2021",
-            "responsibility":"Led cell segmentation project using YOLO v8 for precise instance segmentation. Built user-friendly Flask app deployed on Azure for scalability"
+            "Responsibility":"Led cell segmentation project using YOLO v8 for precise instance segmentation. Built user-friendly Flask app deployed on Azure for scalability"
         }},
     ]
 
