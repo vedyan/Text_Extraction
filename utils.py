@@ -71,7 +71,6 @@ def extract_projects(text):
         }},
     ]
 
-    Please ensure accurate extraction and proper formatting. If you encounter any difficulties or have any questions, feel free to ask.
     """
     response = get_gemini_response(prompt)
     return response
