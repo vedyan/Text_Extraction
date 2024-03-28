@@ -3,7 +3,7 @@ import fitz
 import requests
 from typing import Any
 import re
-from utils import extract_projects, extract_experience
+from utils import extract_projects, extract_experience, extract_skills
 
 app = FastAPI()
 
@@ -25,34 +25,6 @@ def extract_name(text):
     return name
 
 
-def extract_skills(text):
-    # Define patterns for different skill-related sections
-    skill_patterns = {
-        "Programming Languages": r"(?i)Programming\s+Languages?:\s*(.+)",
-        "Tools": r"(?i)Tools?:\s*(.+)",
-        "Databases": r"(?i)Databases?:\s*(.+)",
-        "Libraries": r"(?i)Libraries?:\s*(.+)",
-        "Skills": r"(?i)Skills?:\s*(.+)",
-        "Mathematics": r"(?i)Mathematics?:\s*(.+)",
-        "Soft Skills": r"(?i)Soft\s+Skills?:\s*(.+)"
-    }
-
-    # Initialize an empty list to store extracted skills
-    extracted_skills = []
-
-    # Iterate over each skill pattern
-    for section, pattern in skill_patterns.items():
-        # Search for the pattern in the text
-        match = re.search(pattern, text)
-        if match:
-            # Extract skills from the matched section
-            skills = [skill.strip() for skill in match.group(1).split(',')]
-            # Add extracted skills to the list
-            extracted_skills.extend(skills)
-
-    return extracted_skills
-
-
 @app.post("/extract_text")
 async def extract_text(pdf_file: UploadFile = File(...)) -> Any:
     try:
@@ -68,19 +40,14 @@ async def extract_text(pdf_file: UploadFile = File(...)) -> Any:
         name = extract_name(text)
         email = extract_email(text)
         number = extract_mobile_number(text)
-        skills = extract_skills(text)
-        experience = extract_experience(text)
-        projects = extract_projects(text)
 
         return {
             "text": text,
             "name": name,
             "email": email,
-            "number": number,
-            "skills": skills,
-            "experience": experience,
-            "projects": projects
+            "number": number
         }
+
     except Exception as e:
         return {"error": str(e)}
 
@@ -104,21 +71,55 @@ async def extract_text_from_s3(pdf_url: str = Query(..., description="URL of the
         name = extract_name(text)
         email = extract_email(text)
         number = extract_mobile_number(text)
-        skills = extract_skills(text)
-        experience = extract_experience(text)
-        projects = extract_projects(text)
 
         return {
             "text": text,
             "name": name,
             "email": email,
-            "number": number,
-            "skills": skills,
-            "experience": experience,
-            "projects": projects
+            "number": number
         }
 
     except requests.exceptions.RequestException as e:
         return {"error": f"Error fetching PDF from URL: {str(e)}"}
     except Exception as e:
         return {"error": str(e)}
+
+
+@app.post("/extract_experience")
+async def extract_experience_from_text(text) -> Any:
+    try:
+        experience = extract_experience(text)
+
+        return {
+            "experience": experience
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.post("/extract_projects")
+async def extract_projects_from_text(text) -> Any:
+    try:
+        projects = extract_projects(text)
+
+        return {
+            "projects": projects
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.post("/extract_skills")
+async def extract_skills_from_text(text) -> Any:
+    try:
+        skills = extract_skills(text)
+
+        return {
+            "skills": skills
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+

@@ -75,3 +75,29 @@ def extract_projects(text):
     """
     response = get_gemini_response(prompt)
     return response
+
+
+def extract_skills(text):
+    prompt = f"""
+    **Resume Analysis:**
+
+    The provided resume contains the following details:
+    {text}
+
+    As an experienced text extraction model, your task is to accurately extract and organize the relevant information from the resume.
+
+    Please extract the following details and organize them into a structured response as a list with no heading:
+
+    Extract skills and competencies mentioned in the resume.
+
+    Please ensure that the extracted information is accurate and complete. You may use techniques such as named entity recognition, keyword extraction, or any other suitable methods for extraction.
+
+    For each category, return a list containing the extracted information. If no information is found for a particular category, return an empty list.
+
+    Here's an example of how the response should be structured:
+
+    ["Python", "JavaScript", "Data Analysis", "Machine Learning", "Team Management"]
+    """
+
+    response = get_gemini_response(prompt)
+    return response
