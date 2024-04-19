@@ -1,6 +1,9 @@
 
 # Text Extraction API
 
+# ADD your API key before running or deployment.
+
+
 ## Description
 
 This API extracts text content from uploaded PDF files. It utilizes the PyPDF2 library to process PDFs and returns the extracted text as a string.
