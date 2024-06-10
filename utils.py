@@ -1,6 +1,6 @@
 import google.generativeai as genai
 import re
-genai.configure(api_key='apikey')
+genai.configure(api_key='AIzaSyBvQ-6zhs_vgzFhuCAenPQMjT8FhHLijLY')
 
 
 def get_gemini_response(input):
